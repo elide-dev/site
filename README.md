@@ -1,4 +1,3 @@
-
 # elide website
 
 This repository hosts the frontend code for the [Elide website][0]. It uses [Bun][1], [TypeScript][2], [React][3], [pnpm][4], [esbuild][5], [Cloudflare][6], [MUI][7], [Turbo][8], [Buildless][9], and, of course, [Elide][10].
@@ -16,6 +15,7 @@ Once the client receives the page, it is directed to download and execute a spec
 Part of the complexity handled by this app, and therefore provided for benchmarking/testing, involves the proper building, serving, and fast rendering of this ("hybrid SSR") model.
 
 **Supported servers:**
+
 - Express, via Node
 - Cloudflare Workers
 - Bun's built-in server
@@ -31,6 +31,7 @@ The code is equipped with NPM scripts (run from `bun` or `pnpm`), and a `Makefil
 Most of the UI is in the `components` directory, and those are stitched together into the website via the `app` directory. This is then rendered via client/server use in the `entry` directory, and served via the `server` directory.
 
 To summarize:
+
 ```
 + site
 \
