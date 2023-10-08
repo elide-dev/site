@@ -1,27 +1,28 @@
-import { Builder, BuildMode } from './defs.mjs';
+import { Builder, BuildMode } from "./defs.mjs";
 
 export const builder = Builder.ESBUILD;
 
-export const mode = process.env.NODE_ENV === BuildMode.DEVELOPMENT ?
-  BuildMode.DEVELOPMENT :
-  BuildMode.PRODUCTION;
+export const mode =
+  process.env.NODE_ENV === BuildMode.DEVELOPMENT
+    ? BuildMode.DEVELOPMENT
+    : BuildMode.PRODUCTION;
 
 export const aliases = {
-  '@site': './app',
-  '@entry': './entry',
-  'emitter': 'events',
+  "@site": "./app",
+  "@entry": "./entry",
+  emitter: "events",
 };
 
-export const define = {}
+export const define = {};
 
 export const envVars = {
-  NODE_ENV: 'dev'
-}
+  NODE_ENV: "dev",
+};
 
 export const globalOptions = {
   minify: false,
-  mainFields: ['module', 'main'],
-  publicPath: '/dist',
+  mainFields: ["module", "main"],
+  publicPath: "/dist",
   define,
 };
 

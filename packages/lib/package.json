@@ -1,7 +1,7 @@
 {
-    "name": "@elide-site/some-lib",
-    "verion": "1.0.0",
-    "private": true,
-    "main": "main.mjs",
-    "type": "module"
+  "name": "@elide-site/some-lib",
+  "verion": "1.0.0",
+  "private": true,
+  "main": "main.mjs",
+  "type": "module"
 }

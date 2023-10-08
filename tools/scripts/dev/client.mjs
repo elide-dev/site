@@ -1,11 +1,11 @@
-import { esmClient } from "../targets/client.mjs"
+import { esmClient } from "../targets/client.mjs";
 
 function status(msg) {
-    console.log(`[elide-browser] ${msg}`)
+  console.log(`[elide-browser] ${msg}`);
 }
 
-status('Building client...')
-await esmClient.build()
+status("Building client...");
+await esmClient.build();
 
-status('Watching for client changes...')
-await esmClient.watch()
+status("Watching for client changes...");
+await esmClient.watch();

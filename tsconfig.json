@@ -27,7 +27,7 @@
       "@site/": ["./app/"],
       "@entry/": ["./entry/"],
       "@components/": ["./components/"],
-      "@packages/": ["./packages/"],
-    },
+      "@packages/": ["./packages/"]
+    }
   }
 }

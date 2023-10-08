@@ -1,18 +1,25 @@
-import * as React from 'react';
-import { renderToReadableStream, renderToString } from 'react-dom/server.browser';
-import createEmotionServer from '@emotion/server/create-instance';
-import createCache from '@emotion/cache';
-import App from '../app/App';
+import * as React from "react";
+import {
+  renderToReadableStream,
+  renderToString,
+} from "react-dom/server.browser";
+import createEmotionServer from "@emotion/server/create-instance";
+import createCache from "@emotion/cache";
+import App from "../app/App";
 
 export function createEmotionCache() {
-  return createCache({ key: 'css' });
+  return createCache({ key: "css" });
 }
 
 const cache = createEmotionCache();
-const { extractCriticalToChunks, constructStyleTagsFromChunks } = createEmotionServer(cache);
+const { extractCriticalToChunks, constructStyleTagsFromChunks } =
+  createEmotionServer(cache);
 
-
-function renderFullPage(html: string, css: string, servingMode: string = 'ssr') {
+function renderFullPage(
+  html: string,
+  css: string,
+  servingMode: string = "ssr",
+) {
   return `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,7 +31,7 @@ function renderFullPage(html: string, css: string, servingMode: string = 'ssr') 
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap"
     />
-    ${!!css ? '<meta name="emotion-insertion-point" content="" />' : ''}
+    ${!!css ? '<meta name="emotion-insertion-point" content="" />' : ""}
     ${css}
   </head>
   <body data-serving-mode=${servingMode}>
@@ -36,9 +43,9 @@ function renderFullPage(html: string, css: string, servingMode: string = 'ssr') 
 
 export async function renderCSR(request: Request) {
   const headers = new Headers();
-  headers.set('Content-Type', 'text/html;charset=utf-8');
-  return new Response(renderFullPage('', '', 'csr'), {
-    headers
+  headers.set("Content-Type", "text/html;charset=utf-8");
+  return new Response(renderFullPage("", "", "csr"), {
+    headers,
   });
 }
 
@@ -47,9 +54,9 @@ export async function renderBlocking(request: Request) {
   const emotionChunks = extractCriticalToChunks(html);
   const emotionCss = constructStyleTagsFromChunks(emotionChunks);
   const headers = new Headers();
-  headers.set('Content-Type', 'text/html;charset=utf-8');
+  headers.set("Content-Type", "text/html;charset=utf-8");
   return new Response(renderFullPage(html, emotionCss), {
-    headers
+    headers,
   });
 }
 

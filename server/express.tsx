@@ -1,13 +1,12 @@
-import express, { Request, Response } from 'express';
-import * as React from 'react';
-import * as ReactDOMServer from 'react-dom/server';
-import createEmotionServer from '@emotion/server/create-instance';
-import createCache from '@emotion/cache';
-import App from '@site/App';
-
+import express, { Request, Response } from "express";
+import * as React from "react";
+import * as ReactDOMServer from "react-dom/server";
+import createEmotionServer from "@emotion/server/create-instance";
+import createCache from "@emotion/cache";
+import App from "@site/App";
 
 export function createEmotionCache() {
-  return createCache({ key: 'css' });
+  return createCache({ key: "css" });
 }
 
 function renderFullPage(html: string, css: string) {
@@ -34,12 +33,11 @@ function renderFullPage(html: string, css: string) {
 
 function handleRender(req: Request, res: Response) {
   const cache = createEmotionCache();
-  const { extractCriticalToChunks, constructStyleTagsFromChunks } = createEmotionServer(cache);
+  const { extractCriticalToChunks, constructStyleTagsFromChunks } =
+    createEmotionServer(cache);
 
   // Render the component to a string.
-  const html = ReactDOMServer.renderToString(
-    <App cache={cache} />
-  );
+  const html = ReactDOMServer.renderToString(<App cache={cache} />);
 
   // Grab the CSS from emotion
   const emotionChunks = extractCriticalToChunks(html);
@@ -51,8 +49,8 @@ function handleRender(req: Request, res: Response) {
 
 const app = express();
 
-app.use('/dist', express.static('dist'));
-app.use('/assets', express.static('assets'));
+app.use("/dist", express.static("dist"));
+app.use("/assets", express.static("assets"));
 app.use(handleRender);
 
 const port = 3000;

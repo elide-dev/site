@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { renderBlocking as render } from '../entry/server';
-import { getAssetFromKV } from '@cloudflare/kv-asset-handler';
+import * as React from "react";
+import { renderBlocking as render } from "../entry/server";
+import { getAssetFromKV } from "@cloudflare/kv-asset-handler";
 
 // @ts-ignore
-import manifestJSON from '__STATIC_CONTENT_MANIFEST';
+import manifestJSON from "__STATIC_CONTENT_MANIFEST";
 const assetManifest = JSON.parse(manifestJSON);
 
 async function serveAsset(url: URL, request: Request, env: any, ctx: any) {
@@ -23,23 +23,23 @@ async function serveAsset(url: URL, request: Request, env: any, ctx: any) {
     {
       ASSET_NAMESPACE: env.__STATIC_CONTENT,
       ASSET_MANIFEST: assetManifest,
-    }
+    },
   );
 }
 
 export default {
   async fetch(request: Request, env: any, ctx: any) {
     const url = new URL(request.url);
-    if (url.pathname.startsWith('/dist') && request.method === 'GET') {
+    if (url.pathname.startsWith("/dist") && request.method === "GET") {
       try {
         return serveAsset(url, request, env, ctx);
       } catch (err) {
-        return new Response('Not found', {
+        return new Response("Not found", {
           status: 404,
-          statusText: 'Not Found'
-        })
+          statusText: "Not Found",
+        });
       }
     }
     return await render(request);
-  }
-}
+  },
+};
