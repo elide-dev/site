@@ -45,6 +45,7 @@ jobs:
     name: Deploy
     needs: ["build"]
     uses: ./.github/workflows/module.deploy.yml
+    secrets: inherit
     with:
       environment: stage
       url: https://dev.elide.cloud
