@@ -1,22 +1,25 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
+import { RouterProvider } from "react-router-dom";
+import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { CacheProvider } from "@emotion/react";
-import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./theme";
+import { StaticRouter } from "react-router-dom/server";
 
-export function ButtonUsage() {
-  return <Button variant="contained">Hello world!</Button>;
-}
-
-export default function App(props: { cache: any }) {
+export default function App(props: {
+  cache: any,
+  router: any,
+  renderMode: string,
+  location: string,
+}) {
   return (
-    <CacheProvider value={props.cache}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <h1>Hello React SSR!</h1>
-        <ButtonUsage />
-      </ThemeProvider>
-    </CacheProvider>
+    <React.StrictMode>
+      <CacheProvider value={props.cache}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          {props.renderMode !== 'ssr' ? <RouterProvider router={props.router} /> : <StaticRouter location={props.location} />}
+        </ThemeProvider>
+      </CacheProvider>
+    </React.StrictMode>
   );
 }

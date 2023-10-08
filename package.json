@@ -28,7 +28,7 @@
     "build:opt": "NODE_ENV=production bun run tools/scripts/build.mjs",
     "serve": "pnpm run build && pnpm run serve:express",
     "serve:worker": "bun x wrangler dev --config tools/wrangler.toml",
-    "serve:express": "NODE_ENV=development bun dist/server.express.cjs",
+    "serve:express": "NODE_ENV=production node dist/server.express.cjs",
     "test": "echo 'No tests yet'",
     "lint": "bun x prettier . --check",
     "lint:write": "bun x prettier . --write",
@@ -39,15 +39,21 @@
     "@emotion/react": "11.11.1",
     "@emotion/server": "11.11.0",
     "@emotion/styled": "11.11.0",
+    "@mdx-js/react": "2.3.0",
     "@mui/material": "5.14.12",
+    "localforage": "1.10.0",
+    "match-sorter": "6.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-router-dom": "6.16.0",
+    "sort-by": "1.2.0",
     "tslib": "2.6.2"
   },
   "devDependencies": {
     "@cloudflare/kv-asset-handler": "0.3.0",
     "@commitlint/cli": "17.7.2",
     "@commitlint/config-conventional": "17.7.0",
+    "@mdx-js/esbuild": "2.3.0",
     "@types/express": "4.17.18",
     "@types/react": "18.2.25",
     "@types/react-dom": "18.2.11",
@@ -70,7 +76,11 @@
       "@commitlint/config-conventional"
     ],
     "rules": {
-      "signed-off-by": [2, "always", "Signed-off-by:"]
+      "signed-off-by": [
+        2,
+        "always",
+        "Signed-off-by:"
+      ]
     }
   },
   "prettier": {

@@ -1,6 +1,8 @@
 import * as React from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
+import { createBrowserRouter } from "react-router-dom";
 import createCache from "@emotion/cache";
+import { withRoutes } from "../app/routes";
 import App from "../app/App";
 
 import { elementId, elementType } from "../app/dom";
@@ -10,6 +12,9 @@ export function createEmotionCache() {
 }
 
 const cache = createEmotionCache();
+
+const router = withRoutes(createBrowserRouter);
+const page = document.location.pathname;
 
 let mount = false;
 const isSsr = document.body.getAttribute("data-serving-mode") === "ssr";
@@ -27,7 +32,7 @@ if (!isSsr) {
   if (mount) {
     document.body.appendChild(element);
   }
-  root.render(<App cache={cache} />);
+  root.render(<App cache={cache} router={router} location={page} renderMode={'csr'} />);
 } else {
-  root = hydrateRoot(element, <App cache={cache} />);
+  root = hydrateRoot(element, <App cache={cache} router={router} location={page} renderMode={'ssr'} />);
 }
