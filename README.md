@@ -8,7 +8,7 @@ The dev stack for this project is designed to be flexible, with the ability to s
 
 ### Architecture
 
-The Elide site uses [hybrid SSR][11]. In this serving model, the application is rendered <b>server side<b> on the initial page hit, and fully returned to the client (including styles).
+The Elide site uses [hybrid SSR][11]. In this serving model, the application is rendered <b>server side</b> on the initial page hit, and fully returned to the client (including styles).
 
 Once the client receives the page, it is directed to download and execute a specialized client-side bundle which knows how to "rehydrate" the server-returned markup.
 
