@@ -73,7 +73,7 @@ jobs:
           BUILDLESS_APIKEY: ${{ secrets.BUILDLESS_APIKEY }}
 
       - name: "Deploy: Worker"
-        run: pnpm deploy
+        run: pnpm run deploy
         env:
             BUILDLESS_APIKEY: ${{ secrets.BUILDLESS_APIKEY }}
             CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
