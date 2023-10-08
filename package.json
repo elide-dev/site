@@ -64,6 +64,11 @@
     "web-streams-polyfill": "3.2.1"
   },
   "commitlint": {
-    "extends": ["@commitlint/config-conventional"]
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "prettier": {
+    "tabWidth": 2
   }
 }
