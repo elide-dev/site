@@ -1,0 +1,16 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["NODE_ENV"],
+  "globalPassThroughEnv": ["GITHUB_TOKEN", "BUILDLESS_APIKEY"],
+  "globalDotEnv": [".env.local", ".env"],
+  "pipeline": {
+    "build:dev": {
+      "outputs": ["dist/**", "!.dev/**", "!.wrangler/**"]
+    },
+    "build:opt": {
+      "outputs": ["dist/**", "!.dev/**", "!.wrangler/**"]
+    },
+    "lint": {},
+    "test": {}
+  }
+}
