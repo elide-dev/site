@@ -1,0 +1,8 @@
+jsx = "react"
+
+[install]
+exact = true
+registry = "https://npm.pkg.st"
+
+[test]
+root = "./tests"

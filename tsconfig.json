@@ -1,0 +1,33 @@
+{
+  "include": ["src", "types", "entry", "server"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "importHelpers": true,
+    "declaration": true,
+    "sourceMap": true,
+    "rootDir": ".",
+    "strict": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "types": ["bun-types"],
+    "paths": {
+      "@site/": ["./app/"],
+      "@entry/": ["./entry/"],
+      "@components/": ["./components/"],
+      "@packages/": ["./packages/"],
+    },
+  }
+}
