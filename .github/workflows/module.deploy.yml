@@ -35,13 +35,41 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Deploy
+    name: Deploy to Cloudflare
     environment:
       name: ${{ inputs.environment }}
       url: ${{ inputs.url }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Deploy app
+      - name: "Setup: Checkout"
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: "Setup: PNPM"
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 8.7.5
+
+      - name: "Setup: Node"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: "Setup: Bun"
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: "Setup: Install Dependencies"
+        run: pnpm install
+
+      - name: "Build: Compile"
+        run: pnpm build:opt
+        env:
+          BUILDLESS_APIKEY: ${{ secrets.BUILDLESS_APIKEY }}
+
+      - name: "Deploy: Worker"
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
