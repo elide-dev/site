@@ -8,10 +8,7 @@ import {
 
 import App from "../app/App";
 
-import {
-  elementId,
-  elementType,
-} from '../app/dom';
+import { elementId, elementType } from "../app/dom";
 
 export function createEmotionCache() {
   return createCache({ key: "css" });

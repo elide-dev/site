@@ -3,10 +3,7 @@ import { createRoot, hydrateRoot } from "react-dom/client";
 import createCache from "@emotion/cache";
 import App from "../app/App";
 
-import {
-  elementId,
-  elementType,
-} from '../app/dom';
+import { elementId, elementType } from "../app/dom";
 
 export function createEmotionCache() {
   return createCache({ key: "css" });

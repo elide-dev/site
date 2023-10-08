@@ -10,7 +10,7 @@ export const mode =
 export const aliases = {
   "@site": "./app",
   "@entry": "./entry",
-  "emitter": "events",
+  emitter: "events",
 };
 
 export const define = {};
