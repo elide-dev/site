@@ -1,0 +1,48 @@
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: "Choose an environment to deploy to: <dev|staging|prod>"
+        required: true
+        default: "dev"
+        type: string
+      url:
+        description: "Preview URL"
+        required: false
+        type: string
+
+    secrets:
+      CF_API_TOKEN:
+        required: false
+        description: "Cloudflare Token"
+
+      BUILDLESS_APIKEY:
+        required: false
+        description: "Buildless API Key"
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Choose an environment to deploy to: <stage|live>"
+        required: true
+        default: "stage"
+        type: environment
+      url:
+        description: "Preview URL"
+        required: false
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    environment:
+      name: ${{ inputs.environment }}
+      url: ${{ inputs.url }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy app
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          command: deploy --env ${{ github.event.inputs.environment }}

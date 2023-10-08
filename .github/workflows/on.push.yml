@@ -40,3 +40,11 @@ jobs:
         run: pnpm build
         env:
           BUILDLESS_APIKEY: ${{ secrets.BUILDLESS_APIKEY }}
+
+  deploy:
+    name: Deploy
+    needs: ["build"]
+    uses: ./.github/workflows/module.deploy.yml
+    with:
+      environment: stage
+      url: https://dev.elide.cloud

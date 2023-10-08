@@ -1,5 +1,5 @@
 name = "elide-site"
-main = "dist/server.workers.mjs"
+main = "../dist/server.workers.mjs"
 workers_dev = false
 compatibility_date = "2022-07-12"
 compatibility_flags = ["streams_enable_constructors", "nodejs_compat"]
@@ -8,4 +8,4 @@ kv_namespaces = [
 ]
 
 [site]
-bucket = "./dist"
+bucket = "../dist"
