@@ -73,4 +73,4 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
-          command: deploy --env ${{ github.event.inputs.environment }}
+          command: deploy --config tools/wrangler.toml
