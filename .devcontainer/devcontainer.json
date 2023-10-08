@@ -1,0 +1,21 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "github.codespaces",
+        "github.remotehub",
+        "github.vscode-codeql",
+        "github.vscode-github-actions",
+        "ms-azuretools.vscode-docker",
+        "ms-vscode-remote.remote-containers",
+        "oven.bun-vscode"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/shyim/devcontainers-features/bun:0": {}
+  },
+  "forwardPorts": [3000]
+}
