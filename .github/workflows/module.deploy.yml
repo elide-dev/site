@@ -73,7 +73,7 @@ jobs:
           BUILDLESS_APIKEY: ${{ secrets.BUILDLESS_APIKEY }}
 
       - name: "Deploy: Worker"
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          command: deploy --config tools/wrangler.toml
+        run: pnpm deploy
+        env:
+            BUILDLESS_APIKEY: ${{ secrets.BUILDLESS_APIKEY }}
+            CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
