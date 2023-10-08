@@ -21,13 +21,14 @@
     "dev:client": "node tools/scripts/dev/client.mjs",
     "dev:server": "bun --hot --watch tools/scripts/bun.tsx",
     "build": "pnpm run build:dev",
-    "build:dev": "NODE_ENV=development node tools/scripts/build.mjs",
-    "build:opt": "NODE_ENV=production node tools/scripts/build.mjs",
+    "build:dev": "NODE_ENV=development bun run tools/scripts/build.mjs",
+    "build:opt": "NODE_ENV=production bun run tools/scripts/build.mjs",
     "serve": "pnpm run build && pnpm run serve:express",
     "serve:worker": "bun x wrangler dev",
     "serve:express": "NODE_ENV=development node dist/server.express.cjs",
     "lint": "prettier . --check",
-    "lint:write": "prettier . --write"
+    "lint:write": "prettier . --write",
+    "dist": "pnpm run build:opt"
   },
   "dependencies": {
     "@emotion/cache": "11.11.0",

@@ -1,11 +1,17 @@
 import * as React from "react";
+import createEmotionServer from "@emotion/server/create-instance";
+import createCache from "@emotion/cache";
 import {
   renderToReadableStream,
   renderToString,
 } from "react-dom/server.browser";
-import createEmotionServer from "@emotion/server/create-instance";
-import createCache from "@emotion/cache";
+
 import App from "../app/App";
+
+import {
+  elementId,
+  elementType,
+} from '../app/dom';
 
 export function createEmotionCache() {
   return createCache({ key: "css" });
@@ -35,7 +41,7 @@ function renderFullPage(
     ${css}
   </head>
   <body data-serving-mode=${servingMode}>
-    <div id="root">${html}</div>
+    <${elementType} id="${elementId}">${html}</${elementType}>
     <script defer type="module" src="/dist/client.js"></script>
   </body>
 </html>`;

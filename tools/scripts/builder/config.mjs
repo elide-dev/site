@@ -10,17 +10,17 @@ export const mode =
 export const aliases = {
   "@site": "./app",
   "@entry": "./entry",
-  emitter: "events",
+  "emitter": "events",
 };
 
 export const define = {};
 
 export const envVars = {
-  NODE_ENV: "dev",
+  NODE_ENV: mode,
 };
 
 export const globalOptions = {
-  minify: false,
+  minify: mode === BuildMode.PRODUCTION,
   mainFields: ["module", "main"],
   publicPath: "/dist",
   define,

@@ -3,6 +3,11 @@ import { createRoot, hydrateRoot } from "react-dom/client";
 import createCache from "@emotion/cache";
 import App from "../app/App";
 
+import {
+  elementId,
+  elementType,
+} from '../app/dom';
+
 export function createEmotionCache() {
   return createCache({ key: "css" });
 }
@@ -11,10 +16,10 @@ const cache = createEmotionCache();
 
 let mount = false;
 const isSsr = document.body.getAttribute("data-serving-mode") === "ssr";
-let element = document.getElementById("root");
+let element = document.getElementById(elementId);
 if (!element) {
   mount = true;
-  element = document.createElement("main");
+  element = document.createElement(elementType);
   element.id = "root";
 }
 
