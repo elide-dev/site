@@ -27,6 +27,7 @@ const cache = createEmotionCache();
 const { extractCriticalToChunks, constructStyleTagsFromChunks } =
   createEmotionServer(cache);
 
+const mountCommonStyles = false
 const commonStyles = '/dist/app/styles/common.css'
 const clientScript = '/dist/entry/client.js'
 
@@ -73,7 +74,7 @@ function renderFullPage(
   <head>
     <title>Elide | Polyglot app runtime and framework, JVM-based Node alternative</title>
     <meta name="viewport" content="initial-scale=1, width=device-width" />
-    <link href="${commonStyles}" rel="stylesheet" />
+    ${mountCommonStyles ? `<link href="${commonStyles}" rel="stylesheet" />` : ''}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?${fontSpec}" rel="stylesheet">
@@ -178,7 +179,7 @@ export async function renderStream(request?: Request) {
 export async function renderStreamResponse(request?: Request) {
   await initServer();
   return new Response(await renderStream(request), {
-    headers: responseHeaders(new Headers(), ResposeType.PAGE)
+    headers: responseHeaders(new Headers(), ResponseType.PAGE)
   })
 }
 

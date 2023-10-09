@@ -1,4 +1,6 @@
 declare module '@mui/material/styles' {
+  const ThemeProvider: any;
+
   interface TypographyVariants {
     poster: React.CSSProperties;
   }

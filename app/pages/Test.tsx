@@ -1,23 +1,22 @@
-import * as React from "react";
-import Page, { PageProps } from '../layouts/Page';
+import * as React from "react"
+import Page from '../layouts/Page'
 
 export const pageInfo = Page.info(
   'test',
   'Test',
 )
 
-export default function Test() {
+function Test() {
     return (
-        <div>
-            <b>I'm a code-split lazy page</b>
-        </div>
+        <b>I'm a code-split lazy page</b>
     )
 }
 
-export function Component(props: PageProps) {
-    const state = {...pageInfo, ...props};
+export default Component;
+
+export function Component() {
     return (
-        <Page {...state}>
+        <Page tag={'test'} title={'Test'}>
             <Test />
         </Page>
     )

@@ -4,7 +4,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { CacheProvider } from "@emotion/react";
 import theme from "./theme";
-import { StaticRouter } from "react-router-dom/server";
 
 export enum RenderMode {
   SSR = 'ssr',
