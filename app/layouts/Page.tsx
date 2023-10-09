@@ -1,7 +1,10 @@
 import * as React from "react";
 import { PropsWithChildren } from "react";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Toolbar from "@mui/material/Toolbar";
 import Header from '../../components/header';
-import { Box, Container, Toolbar } from "@mui/material";
+import Gradient from '../../components/gradient';
 
 export interface PageProps extends PropsWithChildren {
     tag: string;
@@ -19,14 +22,24 @@ export function pageInfo(tag: string, title: string, opts: Partial<PageProps> = 
     }, opts);
 }
 
+function PageDefs() {
+    return (
+        <Gradient />
+    )
+}
+
 export default function Page(props: PageProps) {
+    const { title } = props;
+
     return props.fullbleed === true ? (
         <Box component="main">
+            <PageDefs />
             {props.children}
         </Box>
     ) : (
         <Box>
-            {props.noheader === true ? '' : <Header />}
+            <PageDefs />
+            {props.noheader === true ? '' : <Header title={title} />}
 
             <Box component="main">
                 <Toolbar />

@@ -47,8 +47,8 @@ export const styleConfig = {
 }
 
 const postcssPlugins = [
-  tailwind,
   postcssImport,
+  tailwind,
   autoprefixer,
   postcssPresetEnv({stage: 0}),
   postcssNormalize({}),
@@ -64,6 +64,10 @@ export const globalOptions = {
   resolveExtensions: ['.tsx', '.mts', '.ts', '.js'],
   drop: isProd ? ["debugger", "console"] : [],
   define,
+  loader: {
+    '.png': 'file',
+    '.svg': 'dataurl'
+  },
   plugins: [
     // Plugin: WASM
     wasmLoader({

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg [
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
+	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+]>
+<svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 292.400085 318.430115" overflow="visible" xml:space="preserve">
+<switch>
+	<foreignObject requiredExtensions="&ns_ai;" x="0" y="0" width="1" height="1">
+		<i:aipgfRef  xlink:href="#adobe_illustrator_pgf">
+		</i:aipgfRef>
+	</foreignObject>
+	<g i:extraneous="self">
+		<g id="Layer_2_00000118381631492804463780000014862786634177271461_">
+			<g id="Layer_1-2">
+				<rect x="-131.249969" y="-542.409973" display="none" stroke="#000000" stroke-miterlimit="10" width="1417.319946" height="1417.319946"/>
+				<path d="M252.400024,40v2.630005c-0.010406,22.555298-18.303497,40.831543-40.858826,40.821167
+					c-0.097046-0.000061-0.194122-0.000427-0.291168-0.00116L91.250023,82.330017c0,0-30.850006,3.929993-27.199997,32.619995
+					l-24-24.450012V40H252.400024z"/>
+				<path d="M252.400024,236.090027c0.038696,23.345032-18.854828,42.301331-42.19986,42.340027
+					c-0.046722,0.000061-0.093414,0.000061-0.140137,0H40.000023V155.090027l39.360001,40.099976v40.900024H252.400024z"/>
+				<path d="M252.400024,142.490051c0.005524,22.141113-17.938873,40.094482-40.079987,40.100037
+					c-0.023346,0-0.046661,0-0.070007-0.000061h-81.649994l-55.270012-56.159973l-11.289993-11.47998
+					c-3.649994-28.690002,27.199997-32.619995,27.199997-32.619995l54.999992,58.669983L252.400024,142.490051z"/>
+			</g>
+		</g>
+	</g>
+</switch>
+</svg>

@@ -4,3 +4,4 @@ node_modules
 .wrangler
 .turbo/cache
 .turbo/turbo*log
+.DS_Store
