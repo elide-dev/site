@@ -2,7 +2,6 @@ import * as React from "react";
 import { Request as ExpressRequest } from "express";
 import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
-import { minify } from "@minify-html/wasm";
 import {
   renderToReadableStream,
   renderToString,
@@ -42,14 +41,13 @@ const fontSpec = [
   'display=swap',
 ].join('&')
 
-const htmlMinifyConfig = {
+export const htmlMinifyConfig = {
+  do_not_minify_doctype: true,
   keep_spaces_between_attributes: true,
   keep_comments: false,
 }
 
 const assetNonce = __asset_nonce__
-const encoder = new TextEncoder();
-const decoder = new TextDecoder();
 
 enum ResponseType {
   PAGE = 'page',
@@ -62,14 +60,15 @@ export function responseHeaders(headers: Headers, pageType: ResponseType) {
   if (pageType == ResponseType.PAGE) {
     headers.set("Content-Type", "text/html;charset=utf-8");
   }
+  return headers;
 }
 
-function renderPageWrap(
+function renderFullPage(
   html: string,
   css: string,
   servingMode: string = "ssr",
 ) {
-  return `<!DOCTYPE html>
+  return `<!doctype html>
 <html lang="en">
   <head>
     <title>Elide | Polyglot app runtime and framework, JVM-based Node alternative</title>
@@ -86,17 +85,6 @@ function renderPageWrap(
     <script defer type="module" nonce="${assetNonce}" src="${clientScript}"></script>
   </body>
 </html>`;
-}
-
-function renderFullPage(
-  html: string,
-  css: string,
-  servingMode: string = "ssr",
-) {
-  return decoder.decode(minify(
-    encoder.encode((renderPageWrap(html, css, servingMode)),
-    htmlMinifyConfig,
-  )));
 }
 
 let serverInitialized = false;

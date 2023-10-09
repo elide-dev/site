@@ -67,7 +67,7 @@ export const globalOptions = {
   plugins: [
     // Plugin: WASM
     wasmLoader({
-      mode: 'embedded',
+      mode: 'embedded'
     }),
 
     // Plugin: MDX

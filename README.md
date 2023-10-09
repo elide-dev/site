@@ -1,6 +1,6 @@
 # elide website
 
-This repository hosts the frontend code for the [Elide website][0]. It uses [Bun][1], [TypeScript][2], [React][3], [Lit][13], [pnpm][4], [esbuild][5], [Cloudflare][6], [MUI][7], [Turbo][8], [Tailwind][9], [Buildless][10], and, of course, [Elide][11].
+This repository hosts the frontend code for the [Elide website][0]. It uses [Bun][1], [TypeScript][2], [React][3], [Lit][13], [pnpm][4], [esbuild][5], [Cloudflare][6], [MUI][7], [Turbo][8], [Tailwind][9], [PostCSS][14], [Sass][15], [Browserslist][16], [Buildless][10], and, of course, [Elide][11].
 
 ## How it works
 
@@ -57,3 +57,6 @@ To summarize:
 [11]: https://github.com/elide-dev
 [12]: https://web.dev/rendering-on-the-web/#streaming-server-side-rendering-and-progressive-rehydration
 [13]: https://lit.dev
+[14]: https://postcss.org/
+[15]: https://sass-lang.com/
+[16]: https://github.com/browserslist/browserslist

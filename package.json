@@ -27,7 +27,7 @@
     "build:dev": "NODE_ENV=development bun run tools/scripts/build.mjs",
     "build:opt": "NODE_ENV=production bun run tools/scripts/build.mjs",
     "serve": "pnpm run build && pnpm run serve:express",
-    "serve:worker": "bun x wrangler dev --config tools/wrangler.toml",
+    "serve:worker": "pnpm exec wrangler dev --config tools/wrangler.toml",
     "serve:express": "NODE_ENV=production node dist/server.express.mjs",
     "test": "echo 'No tests yet'",
     "lint": "bun x prettier . --check",

@@ -1,14 +1,35 @@
 import express, { Request, Response } from "express";
-import { renderHtmlString as render } from "../entry/server";
+import { minify } from "@minify-html/wasm";
+import { renderHtmlString as render, htmlMinifyConfig } from "../entry/server";
 import { createFetchRequest } from "../app/util/fetch";
+
+const encoder = new TextEncoder();
+const decoder = new TextDecoder();
+
+function response(res: Response, status: number, headers: Headers) {
+  res.status(status)
+  if (headers) {
+    headers.forEach((value, key) => {
+      res.set(key, value)
+    })
+  }
+  return res
+}
 
 // @ts-ignore
 async function handleRender(req: Request, res: Response) {
   const fetchReq = createFetchRequest(req)
-  const { responseData } = await render(fetchReq)
+  const { responseData, headers } = await render(fetchReq)
+  let returnData = responseData;
+  if (headers && (headers.get('Content-Type') || '').indexOf('html') !== -1) {
+    returnData = decoder.decode(minify(
+      encoder.encode(responseData),
+      htmlMinifyConfig,
+    ))
+  }
 
   // Send the rendered page back to the client.
-  res.status(200).send(responseData);
+  response(res, 200, headers).send(returnData)
 }
 
 const app = express();
