@@ -2,6 +2,7 @@ import * as React from "react";
 import { Request as ExpressRequest } from "express";
 import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
+import { minify } from "@minify-html/wasm";
 import {
   renderToReadableStream,
   renderToString,
@@ -27,6 +28,9 @@ const cache = createEmotionCache();
 const { extractCriticalToChunks, constructStyleTagsFromChunks } =
   createEmotionServer(cache);
 
+const commonStyles = '/dist/app/styles/common.css'
+const clientScript = '/dist/entry/client.js'
+
 const fontFamilies = [
   'Inter+Tight:wght@300;400;500;800',
   'Inter:wght@300;400;500;700',
@@ -38,7 +42,29 @@ const fontSpec = [
   'display=swap',
 ].join('&')
 
-function renderFullPage(
+const htmlMinifyConfig = {
+  keep_spaces_between_attributes: true,
+  keep_comments: false,
+}
+
+const assetNonce = __asset_nonce__
+const encoder = new TextEncoder();
+const decoder = new TextDecoder();
+
+enum ResponseType {
+  PAGE = 'page',
+  ASSET = 'asset',
+  API = 'api'
+}
+
+export function responseHeaders(headers: Headers, pageType: ResponseType) {
+  // nothing yet
+  if (pageType == ResponseType.PAGE) {
+    headers.set("Content-Type", "text/html;charset=utf-8");
+  }
+}
+
+function renderPageWrap(
   html: string,
   css: string,
   servingMode: string = "ssr",
@@ -46,8 +72,9 @@ function renderFullPage(
   return `<!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Elide | Bun</title>
+    <title>Elide | Polyglot app runtime and framework, JVM-based Node alternative</title>
     <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link href="${commonStyles}" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?${fontSpec}" rel="stylesheet">
@@ -56,9 +83,28 @@ function renderFullPage(
   </head>
   <body data-serving-mode=${servingMode}>
     <${elementType} id="${elementId}">${html}</${elementType}>
-    <script defer type="module" src="/dist/client.js"></script>
+    <script defer type="module" nonce="${assetNonce}" src="${clientScript}"></script>
   </body>
 </html>`;
+}
+
+function renderFullPage(
+  html: string,
+  css: string,
+  servingMode: string = "ssr",
+) {
+  return decoder.decode(minify(
+    encoder.encode((renderPageWrap(html, css, servingMode)),
+    htmlMinifyConfig,
+  )));
+}
+
+let serverInitialized = false;
+async function initServer() {
+  if (!serverInitialized) {
+    serverInitialized = true;
+    // nothing at this time
+  }
 }
 
 async function prepareServerRouter(originalRequest: Request | ExpressRequest) {
@@ -82,16 +128,26 @@ async function prepareServerRouter(originalRequest: Request | ExpressRequest) {
 
 // @ts-ignore
 export async function renderCSR(request: Request) {
-  const headers = new Headers();
-  headers.set("Content-Type", "text/html;charset=utf-8");
+  // initialize server, begin preparing headers/render
+  await initServer();
   return new Response(renderFullPage("", "", "csr"), {
-    headers,
+    headers: responseHeaders(new Headers(), ResponseType.PAGE),
   });
 }
 
 export async function renderHtmlString(request: Request) {
+  // initialize server, begin rendering
+  await initServer();
   const { router } = await prepareServerRouter(request)
-  const html = renderToString(<App cache={cache} router={router} />)
+  const html = renderToString(<App
+    cache={cache}
+    router={router}
+    renderMode={'ssr'}
+    location={request.url}
+  />)
+
+  // prepare style chunks, headers, render page, return
+  const headers = responseHeaders(new Headers(), ResponseType.PAGE)
   const emotionChunks = extractCriticalToChunks(html)
   const emotionCss = constructStyleTagsFromChunks(emotionChunks)
   const responseData = renderFullPage(html, emotionCss)
@@ -100,17 +156,20 @@ export async function renderHtmlString(request: Request) {
     html,
     emotionCss,
     emotionChunks,
+    headers,
   }
 }
 
 export async function renderBlocking(request: Request) {
+  // initialize server, begin rendering
+  await initServer();
   const { html } = await renderHtmlString(request)
   const emotionChunks = extractCriticalToChunks(html)
   const emotionCss = constructStyleTagsFromChunks(emotionChunks)
-  const headers = new Headers()
-  headers.set("Content-Type", "text/html;charset=utf-8")
+
+  // prepare response headers, render page, return
   return new Response(renderFullPage(html, emotionCss), {
-    headers,
+    headers: responseHeaders(new Headers(), ResponseType.PAGE),
   })
 }
 
@@ -118,8 +177,21 @@ const defaultUrl = new URL("https://elide.dev/");
 const defaultRequest = new Request(defaultUrl.toString());
 
 export async function renderStream(request?: Request) {
+  await initServer();
   const { router } = await prepareServerRouter(request || defaultRequest)
-  return await renderToReadableStream(<App cache={cache} router={router} />)
+  return await renderToReadableStream(<App
+    cache={cache}
+    router={router}
+    renderMode={'ssr'}
+    location={request?.url || '/'}
+  />)
+}
+
+export async function renderStreamResponse(request?: Request) {
+  await initServer();
+  return new Response(await renderStream(request), {
+    headers: responseHeaders(new Headers(), ResposeType.PAGE)
+  })
 }
 
 export const render = renderStream;

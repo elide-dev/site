@@ -2,11 +2,13 @@ import BuildTarget, { BuildType, clientOptions } from "../builder/target.mjs";
 
 export const clientJs = {
   platform: "browser",
-  entryPoints: ["entry/client.tsx"],
   format: "esm",
-  splitting: false,
   bundle: true,
   outdir: "dist",
+  entryPoints: [
+    "entry/client.tsx",
+    "app/styles/common.css",
+  ],
 };
 
 export const esmClient = new BuildTarget(

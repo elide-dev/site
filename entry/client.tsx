@@ -11,7 +11,11 @@ export function createEmotionCache() {
   return createCache({ key: "css" });
 }
 
+console.log('Building Emotion cache');
+
 const cache = createEmotionCache();
+
+console.log('Building router');
 
 const router = withRoutes(createBrowserRouter);
 const page = document.location.pathname;
@@ -28,11 +32,13 @@ if (!element) {
 // Render your React component instead
 let root;
 if (!isSsr) {
+  console.log('Rendering in CSR mode');
   root = createRoot(element);
   if (mount) {
     document.body.appendChild(element);
   }
   root.render(<App cache={cache} router={router} location={page} renderMode={'csr'} />);
 } else {
+  console.log('Rendering in SSR mode');
   root = hydrateRoot(element, <App cache={cache} router={router} location={page} renderMode={'ssr'} />);
 }

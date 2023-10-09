@@ -6,10 +6,15 @@ import { CacheProvider } from "@emotion/react";
 import theme from "./theme";
 import { StaticRouter } from "react-router-dom/server";
 
+export enum RenderMode {
+  SSR = 'ssr',
+  CSR = 'csr'
+}
+
 export default function App(props: {
   cache: any,
   router: any,
-  renderMode: string,
+  renderMode: RenderMode | 'ssr' | 'csr',
   location: string,
 }) {
   return (
@@ -17,7 +22,7 @@ export default function App(props: {
       <CacheProvider value={props.cache}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          {props.renderMode !== 'ssr' ? <RouterProvider router={props.router} /> : <StaticRouter location={props.location} />}
+          <RouterProvider router={props.router} />
         </ThemeProvider>
       </CacheProvider>
     </React.StrictMode>

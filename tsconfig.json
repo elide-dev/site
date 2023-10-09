@@ -1,5 +1,5 @@
 {
-  "include": ["src", "types", "entry", "server"],
+  "include": ["src", "types", "entry", "server", "tools/types"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"],
   "compilerOptions": {
     "baseUrl": ".",
@@ -22,6 +22,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
+    "typeRoots": ["./node_modules/@types"],
     "types": ["bun-types"],
     "paths": {
       "@site/": ["./app/"],

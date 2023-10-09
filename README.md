@@ -1,6 +1,6 @@
 # elide website
 
-This repository hosts the frontend code for the [Elide website][0]. It uses [Bun][1], [TypeScript][2], [React][3], [pnpm][4], [esbuild][5], [Cloudflare][6], [MUI][7], [Turbo][8], [Buildless][9], and, of course, [Elide][10].
+This repository hosts the frontend code for the [Elide website][0]. It uses [Bun][1], [TypeScript][2], [React][3], [Lit][13], [pnpm][4], [esbuild][5], [Cloudflare][6], [MUI][7], [Turbo][8], [Tailwind][9], [Buildless][10], and, of course, [Elide][11].
 
 ## How it works
 
@@ -8,7 +8,7 @@ The dev stack for this project is designed to be flexible, with the ability to s
 
 ### Architecture
 
-The Elide site uses [hybrid SSR][11]. In this serving model, the application is rendered <b>server side</b> on the initial page hit, and fully returned to the client (including styles).
+The Elide site uses [hybrid SSR][12]. In this serving model, the application is rendered <b>server side</b> on the initial page hit, and fully returned to the client (including styles).
 
 Once the client receives the page, it is directed to download and execute a specialized client-side bundle which knows how to "rehydrate" the server-returned markup.
 
@@ -52,6 +52,8 @@ To summarize:
 [6]: https://workers.cloudflare.com
 [7]: https://mui.com
 [8]: https://turbo.build
-[9]: https://less.build
-[10]: https://github.com/elide-dev
-[11]: https://web.dev/rendering-on-the-web/#streaming-server-side-rendering-and-progressive-rehydration
+[9]: https://tailwindcss.com/
+[10]: https://less.build
+[11]: https://github.com/elide-dev
+[12]: https://web.dev/rendering-on-the-web/#streaming-server-side-rendering-and-progressive-rehydration
+[13]: https://lit.dev

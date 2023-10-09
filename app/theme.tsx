@@ -6,6 +6,10 @@ export const colorSecondary = 'rgba(155, 9, 171, 1)';
 export const commonWhite = '#fefefe';
 export const commonBlack = '#111';
 
+export const themeFonts = [
+  '"Inter"',
+];
+
 export const systemFonts = [
   "-apple-system",
   "ui-sans-serif",
@@ -30,10 +34,17 @@ export const monospaceFonts = [
   "'Segoe UI Symbol'",
 ];
 
+export const themeFont = themeFonts.concat(systemFonts).join(',');
 export const systemFont = systemFonts.join(',');
 export const monospaceFont = monospaceFonts.join(',');
 
 export const baseline = {
+  typography: {
+    fontFamily: themeFont,
+    monospace: {
+      fontFamily: monospaceFonts,
+    },
+  },
   palette: {
     common: {
       black: commonBlack,
@@ -50,6 +61,9 @@ export const baseline = {
 
 // Dark theme.
 export const dark = createTheme({
+  typography: {
+    ...baseline.typography,
+  },
   palette: {
     ...baseline.palette,
     primary: {
@@ -63,6 +77,9 @@ export const dark = createTheme({
 
 // Light theme.
 export const light = createTheme({
+  typography: {
+    ...baseline.typography,
+  },
   palette: {
     ...baseline.palette,
     primary: {
