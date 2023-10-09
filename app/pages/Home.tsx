@@ -1,7 +1,8 @@
 import * as React from "react";
-import Page, { PageProps } from '../layouts/Page';
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
+import { Link as RouterLink } from 'react-router-dom';
+import Page, { PageProps } from '../layouts/Page';
 import Logo, { MarkStyle } from "../../components/logo/logo";
 
 export function ButtonUsage() {
@@ -18,7 +19,7 @@ function NavLink(props: { tag: string, label: string, target: string }) {
 
   return (
     <li key={tag}>
-      <Link href={target}>{label}</Link>
+      <Link component={RouterLink} to={target}>{label}</Link>
     </li>
   )
 }
@@ -55,3 +56,5 @@ export default function Home(props: Partial<PageProps>) {
     </Page>
   );
 }
+
+export const Component = Home;

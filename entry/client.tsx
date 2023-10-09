@@ -37,8 +37,12 @@ if (!isSsr) {
   if (mount) {
     document.body.appendChild(element);
   }
-  root.render(<App cache={cache} router={router} location={page} renderMode={'csr'} />);
+  root.render(
+    <App cache={cache} router={router} location={page} />
+  );
 } else {
   console.log('Rendering in SSR mode');
-  root = hydrateRoot(element, <App cache={cache} router={router} location={page} renderMode={'ssr'} />);
+  root = hydrateRoot(element, (
+    <App cache={cache} router={router} location={page} />
+  ));
 }

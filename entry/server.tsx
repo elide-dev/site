@@ -136,12 +136,13 @@ export async function renderHtmlString(request: Request) {
   // initialize server, begin rendering
   await initServer();
   const { router } = await prepareServerRouter(request)
-  const html = renderToString(<App
-    cache={cache}
-    router={router}
-    renderMode={'ssr'}
-    location={request.url}
-  />)
+  const html = renderToString(
+    <App
+      cache={cache}
+      router={router}
+      location={request.url}
+    />
+  )
 
   // prepare style chunks, headers, render page, return
   const headers = responseHeaders(new Headers(), ResponseType.PAGE)
