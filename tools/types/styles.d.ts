@@ -1,4 +1,7 @@
 declare module '@mui/material/styles' {
+  function createTheme(overrides: any) {
+
+  }
   const ThemeProvider: any;
 
   interface TypographyVariants {

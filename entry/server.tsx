@@ -27,7 +27,7 @@ const cache = createEmotionCache();
 const { extractCriticalToChunks, constructStyleTagsFromChunks } =
   createEmotionServer(cache);
 
-const mountCommonStyles = false
+const mountCommonStyles = true
 const commonStyles = '/dist/app/styles/common.css'
 const clientScript = '/dist/entry/client.js'
 
@@ -48,7 +48,15 @@ export const htmlMinifyConfig = {
   keep_comments: false,
 }
 
-const assetNonce = __asset_nonce__
+function cspNonce() {
+  try {
+    // @ts-ignore
+    return __asset_nonce__
+  } catch (err) {
+    // nothing
+    return '_nonce_'
+  }
+}
 
 enum ResponseType {
   PAGE = 'page',
@@ -83,7 +91,7 @@ function renderFullPage(
   </head>
   <body data-serving-mode=${servingMode}>
     <${elementType} id="${elementId}">${html}</${elementType}>
-    <script defer type="module" nonce="${assetNonce}" src="${clientScript}"></script>
+    <script defer type="module" nonce="${cspNonce()}" src="${clientScript}"></script>
   </body>
 </html>`;
 }

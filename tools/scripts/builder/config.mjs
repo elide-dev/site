@@ -31,7 +31,7 @@ export const aliases = {
 }
 
 export const define = {
-  '__asset_nonce__': JSON.stringify(generateNonce()),
+  "__asset_nonce__": JSON.stringify(generateNonce()),
 }
 
 export const envVars = {
@@ -74,7 +74,6 @@ export const globalOptions = {
     mdx({}),
 
     // Plugins: Styles
-    litCssPlugin(),
     sassPlugin({
       ...styleConfig,
       filter: /\.module\.scss$/,
@@ -102,6 +101,7 @@ export const globalOptions = {
         exportGlobals: true,
       })
     }),
+    litCssPlugin(),
   ],
 }
 

@@ -34,9 +34,15 @@ export const monospaceFonts = [
   "'Segoe UI Symbol'",
 ];
 
-export const themeFont = themeFonts.concat(systemFonts).join(',');
-export const systemFont = systemFonts.join(',');
-export const monospaceFont = monospaceFonts.join(',');
+export const serifFonts = [
+  'Merriweather',
+  'serif',
+];
+
+export const fonts = themeFonts.concat(systemFonts)
+export const themeFont = fonts.join(',')
+export const systemFont = systemFonts.join(',')
+export const monospaceFont = monospaceFonts.join(',')
 
 export const baseline = {
   typography: {
