@@ -42,7 +42,7 @@
     "@mdx-js/react": "2.3.0",
     "@minify-html/wasm": "0.11.1",
     "@mui/material": "5.14.12",
-    "lit": "2.8.0",
+    "lit": "3.1.2",
     "lit-html": "2.8.0",
     "localforage": "1.10.0",
     "match-sorter": "6.3.1",
