@@ -78,7 +78,7 @@
     "postcss-import": "15.1.0",
     "postcss-modules": "6.0.0",
     "postcss-normalize": "10.0.1",
-    "postcss-preset-env": "9.1.4",
+    "postcss-preset-env": "9.5.2",
     "sanitize.css": "13.0.0",
     "sass": "1.69.0",
     "stream": "0.0.2",
