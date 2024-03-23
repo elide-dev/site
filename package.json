@@ -64,7 +64,7 @@
     "autoprefixer": "10.4.16",
     "buffer": "6.0.3",
     "bun-html-live-reload": "^0.1.2",
-    "bun-types": "1.0.5-canary.20231007T140129",
+    "bun-types": "1.0.35",
     "concurrently": "8.2.1",
     "esbuild": "0.19.4",
     "esbuild-plugin-lit-css": "2.0.4",
